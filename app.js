@@ -1,7 +1,17 @@
 //express
 const express = require('express');
+
 const app = express();
+
 const path = require('path');
+
+const ejs = require('ejs');
+
+
+app.set('view engine', 'ejs');
+
+
+
 
 
 app.listen(8080, () => {
@@ -12,19 +22,24 @@ app.listen(8080, () => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'temp/index.html'));
-
+    res.render('index');
+    
     
 }
 );
-const myLogger = (req, res, next) => {
-    console.log('LOGGED');
-    next();
-}
 
-const myLogger2 = (req, res, next) => {
-    console.log('LOGGED2');
-    next();
+app.get('/about', (req, res) => {
+    res.render('about');
 }
+);
+
+//get /add_post
+app.get('/add_post', (req, res) => {
+    res.render('add_post');
+}
+);
+
+
 
 //middleware 
 app.use(express.static('public'));
@@ -32,8 +47,6 @@ app.use(express.static('public'));
 
 
 /// mylogger
-
-
 
 
 const photos = [
